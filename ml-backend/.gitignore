@@ -1,0 +1,64 @@
+ml-backend/yolov5/
+# Ignore Python bytecode files
+*.pyc
+__pycache__/
+yolov5/
+# Ignore virtual environment directories
+venv/
+env/
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore log files
+*.log
+
+# Ignore system-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore model checkpoints and weights
+*.h5
+*.pkl
+*.pth
+*.ckpt
+
+# Ignore data directories
+data/
+mlruns/
+
+# Ignore IDE/editor specific files
+.idea/
+.vscode/
+
+# Ignore operating system files
+Desktop.ini
+$RECYCLE.BIN/
+
+# Ignore package distribution directories
+build/
+dist/
+*.egg-info/
+
+# Ignore test and coverage directories
+tests/
+.coverage
+nosetests.xml
+coverage.xml
+*.coveragerc
+
+# Ignore Docker files
+Dockerfile
+docker-compose.yml
+
+# Ignore environment configuration files
+*.env
+.env/
+
+# Ignore other unnecessary files
+*.bak
+*.swp
+uploads/
+uploaded.jpg
+uploaded_vgg16.jpg
+ml-backend/uploads/

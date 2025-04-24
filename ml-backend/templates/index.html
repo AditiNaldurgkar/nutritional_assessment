@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Image Processing with YOLO and VGG16</title>
+</head>
+<body>
+    <h1>Upload Image for Disease Detection</h1>
+
+    <h2>YOLO Object Detection</h2>
+    <form id="yoloForm" enctype="multipart/form-data" method="post" action="/predict">
+        <input type="file" name="image" accept="image/*" required />
+        <button type="submit">Upload and Detect</button>
+    </form>
+    <pre id="yoloResult"></pre>
+
+    <h2>VGG16 Classification</h2>
+    <form id="vggForm" enctype="multipart/form-data" method="post" action="/vgg16">
+        <input type="file" name="image" accept="image/*" required />
+        <button type="submit">Upload and Classify</button>
+    </form>
+    <pre id="vggResult"></pre>
+
+    <script>
+        // Mapping of YOLOv5 class IDs to disease/nutritional lack names (example)
+        const yoloClassMap = {
+            0: "Disease A",
+            1: "Nutritional Lack B",
+            2: "Disease C",
+            // Add actual mappings as per your model classes
+        };
+
+        function formatYoloPredictions(predictions) {
+            if (!predictions || predictions.length === 0) {
+                return "No objects detected.";
+            }
+            return predictions.map(pred => {
+                const clsName = yoloClassMap[pred.class] || `Class ${pred.class}`;
+                return `${clsName} (Confidence: ${(pred.confidence * 100).toFixed(2)}%)`;
+            }).join("\n");
+        }
+
+        function formatVggPredictions(predictions) {
+            if (!predictions || predictions.length === 0) {
+                return "No classification results.";
+            }
+            return predictions.map(pred => {
+                return `${pred.label}: ${(pred.probability * 100).toFixed(2)}%`;
+            }).join("\n");
+        }
+
+        document.getElementById('yoloForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/predict', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            if (data.error) {
+                document.getElementById('yoloResult').textContent = "Error: " + data.error;
+            } else {
+                document.getElementById('yoloResult').textContent = formatYoloPredictions(data.predictions);
+            }
+        });
+
+        document.getElementById('vggForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/vgg16', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            if (data.error) {
+                document.getElementById('vggResult').textContent = "Error: " + data.error;
+            } else {
+                document.getElementById('vggResult').textContent = formatVggPredictions(data.predictions);
+            }
+        });
+    </script>
+</body>
+</html>

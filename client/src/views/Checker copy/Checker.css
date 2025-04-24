@@ -1,0 +1,102 @@
+body{
+    margin: 0px;
+    padding: 0px;
+
+}
+.checker-view{
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    margin: 0px;
+}
+.submitbtn{
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s ease;
+    border: none;
+    display: inline-block;
+    position: absolute;
+    left: 45%;
+   margin-bottom: 20px;
+}
+.Notesec{
+    margin: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.details-form{
+    background-color: rgba(128, 128, 128, 0.5); /* Gray with 70% opacity */
+    position: relative;
+    border-radius: 10px;
+    width: 50%;
+    
+    position: relative;
+    height: 500px;
+    left:90px;
+    padding: 5px ;
+    padding-left: 15px;
+    margin: 5px;
+    margin-top: 0px;}
+.sub-btn{
+align-items: center;
+color: black;
+}
+.details-form:hover{
+    box-shadow: 4px 4px 4px 4px gray;
+}
+.img-upload-container{
+    height: 800px;
+   
+    width: 500px;
+    padding: 10px 20px;
+    position: absolute;
+    right: 0px;
+}
+.upload-head{
+    text-align: center;
+    font-size: large;
+  
+}
+.img-input{
+    padding: 6px;
+    color: gray;
+}
+.hidden-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .custom-file-button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s ease;
+    border: none;
+    display: inline-block;
+  }
+.imgbox{
+    height: 500px;
+    width: 500px;
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+.btn-upload{
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color:#007bff; 
+    color: white;
+    margin: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+}

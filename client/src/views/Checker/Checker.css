@@ -1,0 +1,221 @@
+/* body{
+    margin: 0px;
+    padding: 0px;
+
+}
+.checker-view{
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    margin: 0px;
+    margin-top: 30px;
+}
+.submitbtn{
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s ease;
+    border: none;
+    display: inline-block;
+    position: absolute;
+    left: 45%;
+   margin-bottom: 20px;
+}
+.Notesec{
+    margin: 5px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.details-form{
+    background-color: rgba(128, 128, 128, 0.5); /* Gray with 70% opacity */
+    /* position: relative;
+    border-radius: 10px;
+    width: 50%;
+    
+    position: relative;
+    height: 500px;
+    left:90px;
+    padding: 5px ;
+    padding-left: 15px;
+    margin: 5px;
+    margin-top: 0px;} */
+/* .sub-btn{
+align-items: center;
+color: black;
+}
+.details-form:hover{
+    box-shadow: 4px 4px 4px 4px gray;
+}
+.img-upload-container{
+    height: 800px;
+   
+    width: 500px;
+    padding: 10px 20px;
+    position: absolute;
+    right: 0px;
+}
+.upload-head{
+    text-align: center;
+    font-size: large;
+  
+}
+.img-input{
+    padding: 6px;
+    color: gray;
+}
+.hidden-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .custom-file-button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s ease;
+    border: none;
+    display: inline-block; */ */
+  /* }
+.imgbox{
+    height: 500px;
+    width: 500px;
+    border: 2px solid gray;
+    border-radius: 5px;
+}
+.btn-upload{
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: none;
+    background-color:#007bff; 
+    color: white;
+    margin: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+} */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #d2d6dc;
+  color: #333;
+  /* background-image: ; */
+}
+
+.checker-view {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 60px;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.details-form {
+  background: #e6f0ff;
+  box-shadow: 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  padding: 30px 40px;
+  flex: 10;
+  min-width: 300px;
+  max-width: 600px;
+  transition: transform 0.1s ease;
+}
+
+.details-form:hover {
+  /* transform: translateY(-10px); */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.upload-head {
+  font-size: 24px;
+  
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 25px;
+  color: #007bff;
+  transition: transform 0.1s ease;
+
+}
+.upload-head:hover{
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+
+}
+
+.Notesec {
+  font-size: 12px;
+  color: #555;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 20px;
+  line-height: 1.5;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  border: none;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.img-upload-container {
+  background: #e6f0ff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 30px 30px;
+  flex: 1;
+  min-width: 300px;
+  max-width: 500px;
+  text-align: center;
+}
+.img-upload-container:hover{
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+
+}
+.custom-file-button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  border: none;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.custom-file-button:hover {
+  background-color: #0056b3;
+}
+
+.hidden-input {
+  display: none;
+}
+
+.imgbox {
+  margin-top: 20px;
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid #ddd;
+}

@@ -1,0 +1,12 @@
+.inp-box{
+    padding: 8px 5px;
+    width: 80%;
+    margin: 2px;
+    margin-bottom: 15px;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.label{
+    margin: 4px;
+    text-align: center;
+}

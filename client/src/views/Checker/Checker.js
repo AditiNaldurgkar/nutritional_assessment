@@ -1,0 +1,182 @@
+import React from 'react'
+import { useState } from "react";
+import "./Checker.css"
+import Navbar from './../../components/Navbar/Navbar';
+import axios from 'axios';
+import Input from "../../components/Cinput/Input";
+import Footer from "../../components/Footer/Footer";
+
+import Toaster,{toast} from 'react-hot-toast';
+
+function Checker() {
+    const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState(null);
+  
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setImage(file);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPreview(reader.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+  
+    const handleUpload = () => {
+      if (!image) {
+        alert("Please select an image first.");
+        return;
+      }
+  
+      const formData = new FormData();
+      formData.append("image", image);
+  
+      fetch("http://localhost:5000/vgg16", {
+        method: "POST",
+        body: formData,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.error) {
+            alert("Error: " + data.error);
+          } else if (data.predictions) {
+            // Format predictions for display
+            const preds = data.predictions.map(p => {
+              if (p.label && p.probability) {
+                return `${p.label} (${(p.probability * 100).toFixed(2)}%)`;
+              } else if (p.class !== undefined) {
+                return `Class ${p.class} (Confidence: ${(p.confidence * 100).toFixed(2)}%)`;
+              } else {
+                return JSON.stringify(p);
+              }
+            }).join(", ");
+            setPredictionResult(preds);
+          } else {
+            alert("Unexpected response from server");
+          }
+        })
+        .catch((err) => console.error(err));
+    };
+    const [Name,SetName] = useState("");
+    const [age,Setage] = useState("");
+    const [Gender,SetGender] = useState("");
+    const [Height,SetHeight] = useState("");
+    const [Weight,SetWeight] = useState("");
+    /*const submit = async ({ Name, age, Gender, Height, Weight }) => {
+      const heightNum = Number(Height);
+      const weightNum = Number(Weight);
+      const BMI = weightNum/(heightNum*heightNum);
+      if(BMI<=18.5){
+        console.log(`underweight as your BMI is ${BMI} `);
+      }
+      else  if(BMI>18.5 && BMI<24.9){
+        console.log(`You are healthy as your BMI is ${BMI} `);
+      }
+      else  if(BMI>=25.0 && BMI<=29.9 ){
+        console.log(`overweight as your BMI is ${BMI} `);
+      }
+      else if(BMI>=30.0){
+        console.log(`obese as your bmi is ${BMI}`);}
+      try {
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/patient`, {
+          Name,
+          age,
+          Gender,
+          Height,
+          Weight,
+          BMI
+        });
+    
+        console.log("Response:", response.data);
+        SetGender("");
+        SetHeight("");
+        SetWeight("");
+        SetName("");
+        Setage("");
+        toast.success("details saved");
+        
+      } catch (error) {
+        console.error("Error submitting data:", error);
+      }
+    };*/
+    const [bmimsg,Setbmimsg]=useState("")
+    const submit = async ({ Name, age, Gender, Height, Weight }) => {
+      const heightNum = Number(Height);
+      const weightNum = Number(Weight);
+      const BMI = weightNum/(heightNum*heightNum);
+      if(BMI<=18.5){
+       Setbmimsg(`underweight as your BMI is ${BMI} `);
+      }
+      else  if(BMI>18.5 && BMI<24.9){
+        Setbmimsg(`You are healthy as your BMI is ${BMI} `);
+      }
+      else  if(BMI>=25.0 && BMI<=29.9 ){
+        Setbmimsg(`overweight as your BMI is ${BMI} `);
+      }
+      else if(BMI>=30.0){
+        Setbmimsg(`obese as your bmi is ${BMI}`);}
+      }
+
+
+  return (
+    <div className='checker page'>
+      <Navbar/>
+      <div className="checker-view">
+        
+        <div className="details-form">
+          <h3 className="upload-head">Basic Details</h3>
+          <form>
+              <Input label={"Name:"} placeholder={"Enter your name"} onChange={(e)=>SetName(e.target.value)} value={Name}></Input>
+              <Input label={" Age:  "} placeholder={"Enter your age"} onChange={(e)=>Setage(e.target.value)} value={age}></Input>
+              <Input label={"Gender:"} placeholder={"Enter your gender"} onChange={(e)=>SetGender(e.target.value)} value={Gender}></Input>
+              <Input label={"Weight:"} placeholder={"Enter your weight"} onChange={(e)=>SetWeight(e.target.value)} value={Weight}></Input>
+              <Input label={"Height:"} placeholder={"Enter your height"} onChange={(e)=>SetHeight(e.target.value)} value={Height}></Input>
+             
+          </form>
+          <div className="Notesec">
+            <span >
+            Note: The predictions provided are generated by a machine learning model based on the uploaded image and input data. While we strive for accuracy, results may vary. Your data is securely processed and not shared with any third parties, ensuring privacy and confidentiality.
+             For any deficiencies predicted, it is recommended to consult a healthcare professional for proper diagnosis and guidance.
+            </span>
+          </div>
+          <button onClick={() => submit({ Name, age, Height, Weight, Gender })}> Submit</button>
+          <br/>
+          <span>{bmimsg}</span>
+        </div>
+      <div className="img-upload-container">
+        <h3 className="upload-head">Upload Image</h3>
+        <input
+        type="file"
+        accept="image/*"
+        id="fileInput"
+        onChange={handleFileChange}
+        className="hidden-input"
+      />
+      <label htmlFor="fileInput" className="custom-file-button">
+        Choose File
+      </label>
+      
+  
+        {preview && (
+          <div>
+            <h4>Preview:</h4>
+            <img src={preview} alt="Uploaded Preview" className="imgbox" />
+          </div>
+        )}
+        <br/>
+  
+        <button className="btn-upload" onClick={handleUpload}>Upload</button>
+      </div>
+      
+      </div>
+      <Toaster/>
+      <Footer/>
+      </div>
+      
+    );
+  };
+
+
+export default Checker
